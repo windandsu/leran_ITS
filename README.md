@@ -4,15 +4,7 @@
 
 ## 架构概览
 - **学生端 Agent**
-  - TutorAgent：解释概念、示例与引用。【`src/its/agents/student/tutor.py`】
-  - PracticeAgent：生成练习与批改反馈。【`src/its/agents/student/practice.py`】
-  - PlannerAgent：根据画像生成学习计划。【`src/its/agents/student/planner.py`】
-  - SummarizerAgent：周度总结与画像更新。【`src/its/agents/student/summarizer.py`】
-- **教师端 Agent**
-  - IngestionAgent：导入并解析外部资源。【`src/its/agents/teacher/ingestion.py`】
-  - KGBuilderAgent：利用 GraphRAG 构图。【`src/its/agents/teacher/kg_builder.py`】
-  - CuratorAgent：质量校验与元数据完善。【`src/its/agents/teacher/curator.py`】
-  - AnalyticsAgent：事件聚合与报告。【`src/its/agents/teacher/analytics.py`】
+
 - **协调器**
   - Orchestrator：基于 LangGraph/可扩展的路由中心。【`src/its/orchestrator.py`】
 - **共享工具**
@@ -37,8 +29,7 @@ retriever = RetrieverTool()
 profile_store = ProfileStoreTool()
 event_store = EventStoreTool()
 citation_tool = CitationTool()
-tutor = TutorAgent(retriever, citation_tool)
-# 省略其它 Agent 初始化
+
 ```
 2. 通过 `Orchestrator.dispatch` 路由任务：
 ```python

@@ -29,6 +29,31 @@ class StudentProfile:
     skills: Dict[str, float]
     preferences: Dict[str, Any] = field(default_factory=dict)
     history: List[str] = field(default_factory=list)
+    recent_questions: List[str] = field(default_factory=list)
+    schedule: List["PlanItem"] = field(default_factory=list)
+    progress_notes: List[str] = field(default_factory=list)
+
+
+@dataclass
+class PlanItem:
+    """学习计划条目，支持间隔重复。"""
+
+    title: str
+    due: datetime
+    interval_days: int
+    resources: List[str] = field(default_factory=list)
+    difficulty: str = "medium"
+    review: bool = False
+
+
+@dataclass
+class PracticeFeedback:
+    """练习评估反馈。"""
+
+    score: float
+    hints: List[str]
+    strengths: List[str]
+    improvements: List[str]
 
 
 @dataclass

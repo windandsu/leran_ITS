@@ -22,6 +22,9 @@ class KGBuilderAgent(BaseAgent):
             return self._default_respond("KG Builder Agent 未处理该任务。")
 
         docs: List[Document] = message.payload.get("documents", [])
-        self.graphrag.add_documents(docs)
+        namespace = message.payload.get("namespace", "default")
+        self.graphrag.add_documents(docs, namespace=namespace)
         summary = self.graphrag.describe_graph()
-        return AgentResponse(content="知识图谱已更新", updates={"graph_summary": summary})
+        return AgentResponse(
+            content=f"知识图谱已更新，新增 {len(docs)} 条分片", updates={"graph_summary": summary, "namespace": namespace}
+        )
